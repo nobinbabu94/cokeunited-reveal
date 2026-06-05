@@ -52,12 +52,12 @@ export default function UploadsPage() {
     <div className=" space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">
+        {/* <h1 className="text-2xl font-semibold text-gray-900">
           Project Uploads
-        </h1>
-        <p className="text-gray-500 mt-1">
+        </h1> */}
+        {/* <p className="text-gray-500 mt-1">
           Upload retailer project files and review upload requests.
-        </p>
+        </p> */}
       </div>
 
       {/* Upload Cards */}
@@ -65,7 +65,25 @@ export default function UploadsPage() {
         {/* Master Product */}
         <div className="bg-white border rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-semibold mb-3">
-            Upload Master Product File
+           Upload Weekly Sales Data
+          </h2>
+
+          <p className="text-sm text-gray-500 mb-6">
+            Upload retailer weekly sales data in Excel format.
+          </p>
+
+          <button
+            onClick={() => setMasterProductModal(true)}
+            className="w-full bg-gray-500 text-white py-2.5 rounded-md font-medium hover:bg-gray-700 transition cursor-pointer"
+          >
+            Upload
+          </button>
+        </div>
+
+        {/* Store File */}
+        <div className="bg-white border rounded-lg shadow-sm p-6">
+          <h2 className="text-lg font-semibold mb-3">
+           Upload Master Product Data
           </h2>
 
           <p className="text-sm text-gray-500 mb-6">
@@ -73,46 +91,28 @@ export default function UploadsPage() {
           </p>
 
           <button
-            onClick={() => setMasterProductModal(true)}
-            className="w-full bg-gray-500 text-white py-2.5 rounded-md font-medium hover:bg-gray-700 transition cursor-pointer"
-          >
-            Upload Master Product
-          </button>
-        </div>
-
-        {/* Store File */}
-        <div className="bg-white border rounded-lg shadow-sm p-6">
-          <h2 className="text-lg font-semibold mb-3">
-            Upload Store File
-          </h2>
-
-          <p className="text-sm text-gray-500 mb-6">
-            Upload retailer store information in Excel format.
-          </p>
-
-          <button
             onClick={() => setStoreModal(true)}
             className="w-full bg-gray-500 text-white py-2.5 rounded-md font-medium hover:bg-gray-700 transition cursor-pointer"
           >
-            Upload Store File
+            Upload
           </button>
         </div>
 
         {/* Status Table */}
         <div className="bg-white border rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-semibold mb-3">
-            Upload Status Table
+            Upload Store data
           </h2>
 
           <p className="text-sm text-gray-500 mb-6">
-            Upload project status table in Excel format.
+            Upload retailer store data in Excel format.
           </p>
 
           <button
             onClick={() => setStatusModal(true)} 
             className="w-full bg-gray-500 text-white py-2.5 rounded-md font-medium hover:bg-gray-700 transition cursor-pointer"
           >
-            Upload Status Table
+            Upload
           </button>
         </div>
       </div>
@@ -130,35 +130,35 @@ export default function UploadsPage() {
         <div className="flex gap-3 px-6 pt-4">
           <button
             onClick={() => setActiveTab("master")}
-            className={`px-4 py-2 rounded-md font-medium transition ${
+            className={`cursor-pointer px-4 py-2 rounded-md font-medium transition ${
               activeTab === "master"
                 ? "bg-[#F40009] text-white"
                 : "bg-gray-100 text-gray-700"
             } `}
           >
-            Master Product Requests
+           Weekly Sales Data
           </button>
 
           <button
             onClick={() => setActiveTab("store")}
-            className={`px-4 py-2 rounded-md font-medium transition ${
+            className={`cursor-pointer px-4 py-2 rounded-md font-medium transition ${
               activeTab === "store"
                 ? "bg-[#F40009] text-white"
                 : "bg-gray-100 text-gray-700"
             }`}
           >
-            Store File Requests
+            Master Product Data
           </button>
 
           <button
             onClick={() => setActiveTab("status")}
-            className={`px-4 py-2 rounded-md font-medium transition ${
+            className={`cursor-pointer px-4 py-2 rounded-md font-medium transition ${
               activeTab === "status"
                 ? "bg-[#F40009] text-white"
                 : "bg-gray-100 text-gray-700"
             }`}
           >
-            Status Table Requests
+            Store data
           </button>
         </div>
 
@@ -223,7 +223,7 @@ export default function UploadsPage() {
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-[450px]">
             <h3 className="text-lg font-semibold mb-4">
-              Upload Master Product File
+             Upload Weekly Sales Data
             </h3>
 
             <p className="text-gray-500">
@@ -244,7 +244,7 @@ export default function UploadsPage() {
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-[450px]">
             <h3 className="text-lg font-semibold mb-4">
-              Upload Store File
+              Upload Master Product Data
             </h3>
 
             <p className="text-gray-500">
@@ -265,7 +265,7 @@ export default function UploadsPage() {
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-[450px]">
             <h3 className="text-lg font-semibold mb-4">
-              Upload Status Table
+             Upload Store data
             </h3>
 
             <p className="text-gray-500">

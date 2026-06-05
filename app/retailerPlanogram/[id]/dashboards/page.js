@@ -10,7 +10,7 @@ export default function DashboardPage() {
   return (
     <AppLayout>
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Dashboard, (ID: {id})</h1>
+        <h1 className="text-2xl font-bold mb-4">Superset</h1>
         
       </div>
     </AppLayout>

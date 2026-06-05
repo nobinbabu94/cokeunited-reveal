@@ -15,7 +15,7 @@ const projects = [
     products: 518,
     stores: 576,
     status: "In-Progress",
-    user: "John Doe"
+    user: 2
   },
   // {
   //   id: 2,
@@ -74,7 +74,7 @@ export default function ManageRetailer() {
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
 
-        <div className="flex items-center gap-3">
+        {/* <div className="flex items-center gap-3">
 
           <select
             value={retailer}
@@ -91,7 +91,7 @@ export default function ManageRetailer() {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-3">
 
