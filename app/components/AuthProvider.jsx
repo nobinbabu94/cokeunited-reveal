@@ -1,6 +1,11 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Auth } from "aws-amplify";
 import { initAmplify } from "./amplifyConfig";
 
@@ -27,7 +32,8 @@ export function AuthProvider({ children }) {
       try {
         initAmplify();
 
-        const sessionUser = await Auth.currentAuthenticatedUser();
+        const sessionUser =
+          await Auth.currentAuthenticatedUser();
 
         const role = extractRole(sessionUser);
 
@@ -48,7 +54,10 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async ({ username, password }) => {
-    const signedInUser = await Auth.signIn(username, password);
+    const signedInUser = await Auth.signIn(
+      username,
+      password
+    );
 
     const role = extractRole(signedInUser);
 
@@ -65,7 +74,12 @@ export function AuthProvider({ children }) {
   };
 
   const logout = async () => {
-    await Auth.signOut();
+    try {
+      await Auth.signOut();
+    } catch (err) {
+      console.error(err);
+    }
+
     setUser(null);
   };
 

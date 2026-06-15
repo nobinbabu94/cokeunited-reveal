@@ -1,7 +1,7 @@
 "use client";
 
 import RoleGuard from "@/app/components/RoleGuard";
-import AppLayout from "@/components/layout/AppLayout";
+import AppLayout from "@/app/components/layout/AppLayout";
 import { useParams } from "next/navigation";
 
 

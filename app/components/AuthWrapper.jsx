@@ -1,35 +1,54 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "./AuthProvider";
 import LoadingSpinner from "./loading/LoadingSpinner";
 
-export default function AuthWrapper({
-  children,
-  mode = "protected",
-}) {
-  const router = useRouter();
-
+export default function AuthWrapper({ children }) {
   const { user, loading } = useAuth();
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (loading) return;
 
-    if (mode === "protected" && !user) {
-      router.replace("/login");
+    // NOT LOGGED IN
+    if (!user) {
+      if (pathname !== "/login") {
+        router.replace("/login");
+      }
+      return;
     }
 
-    if (mode === "auth" && user) {
-      router.replace("/");
+    // LOGGED IN
+    if (pathname === "/login") {
+      switch (user.role) {
+        case "admin":
+          router.replace("/manageRetailer");
+          break;
+
+        case "retailer":
+          router.replace("/retailerPlanogram");
+          break;
+
+        default:
+          router.replace("/");
+      }
     }
-  }, [loading, user, mode, router]);
+  }, [user, loading, pathname, router]);
 
   if (loading) {
     return <LoadingSpinner />;
   }
 
-  if (mode === "protected" && !user) {
+  // Block page render while redirecting
+  if (!user && pathname !== "/login") {
+    return <LoadingSpinner />;
+  }
+
+  if (user && pathname === "/login") {
     return <LoadingSpinner />;
   }
 

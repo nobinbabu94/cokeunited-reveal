@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "../AuthProvider";
 
 export default function Navbar({ onToggleSidebar }) {
   const pathname = usePathname();
@@ -9,6 +10,8 @@ export default function Navbar({ onToggleSidebar }) {
 
   const [showUserMenu, setShowUserMenu] = useState(false);
   const menuRef = useRef(null);
+
+ const { logout } = useAuth();
 
   const isRetailerPlanogram =
     pathname?.startsWith("/retailerPlanogram");
@@ -43,10 +46,8 @@ export default function Navbar({ onToggleSidebar }) {
     };
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
+  const handleLogout = async () => {
+    await logout();
     router.replace("/login");
   };
 

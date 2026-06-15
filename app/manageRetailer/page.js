@@ -1,6 +1,6 @@
 "use client";
 
-import AppLayout from "@/components/layout/AppLayout";
+import AppLayout from "@/app/components/layout/AppLayout";
 import RoleGuard from "../components/RoleGuard";
 import ManageRetailer from "../components/ManageRetailer";
 

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAuth } from "../../app/components/AuthProvider";
+import { useAuth } from "../AuthProvider";
 
 // base nav when not in projectSetup
 

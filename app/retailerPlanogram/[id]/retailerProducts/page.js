@@ -1,6 +1,6 @@
 "use client";
 
-import AppLayout from "@/components/layout/AppLayout";
+import AppLayout from "@/app/components/layout/AppLayout";
 import { useState } from "react";
 
 export default function RetailerProductsPage() {
