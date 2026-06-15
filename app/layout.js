@@ -1,9 +1,9 @@
-import "./globals.css";
 import { AuthProvider } from "./components/AuthProvider";
-import AuthGuard from "./components/AuthGuard";
+import "./globals.css";
+import "./styles/analytic.css"
 
 export const metadata = {
-  title: "Reveal - Space Analysis System",
+  title: "Reveal",
   description: "Reveal Space Analysis System",
 };
 
@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <AuthProvider>
-          <AuthGuard>{children}</AuthGuard>
+          {children}
         </AuthProvider>
       </body>
     </html>

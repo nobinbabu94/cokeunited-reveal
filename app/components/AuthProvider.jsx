@@ -1,34 +1,85 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { Auth } from "aws-amplify";
+import { initAmplify } from "./amplifyConfig";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("auth.user");
-      if (raw) setUser(JSON.parse(raw));
-    } catch (e) {
-      console.error("Failed to parse auth.user", e);
-    }
-  }, []);
+  const extractRole = (session) => {
+    const groups =
+      session?.signInUserSession?.accessToken?.payload?.[
+        "cognito:groups"
+      ] || [];
 
-  const login = ({ username, role }) => {
-    const u = { username, role };
-    setUser(u);
-    localStorage.setItem("auth.user", JSON.stringify(u));
+    if (groups.includes("Admins")) return "admin";
+    if (groups.includes("Retailers")) return "retailer";
+
+    return "user";
   };
 
-  const logout = () => {
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        initAmplify();
+
+        const sessionUser = await Auth.currentAuthenticatedUser();
+
+        const role = extractRole(sessionUser);
+
+        setUser({
+          username:
+            sessionUser.attributes?.email ||
+            sessionUser.username,
+          role,
+        });
+      } catch (error) {
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUser();
+  }, []);
+
+  const login = async ({ username, password }) => {
+    const signedInUser = await Auth.signIn(username, password);
+
+    const role = extractRole(signedInUser);
+
+    const userObj = {
+      username:
+        signedInUser.attributes?.email ||
+        signedInUser.username,
+      role,
+    };
+
+    setUser(userObj);
+
+    return userObj;
+  };
+
+  const logout = async () => {
+    await Auth.signOut();
     setUser(null);
-    localStorage.removeItem("auth.user");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        loading,
+        login,
+        logout,
+        isAdmin: user?.role === "admin",
+        isRetailer: user?.role === "retailer",
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

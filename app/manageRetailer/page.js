@@ -1,26 +1,17 @@
 "use client";
 
 import AppLayout from "@/components/layout/AppLayout";
-import Link from "next/link";
-import ManageRetailer from "../ManageRetailer";
+import RoleGuard from "../components/RoleGuard";
+import ManageRetailer from "../components/ManageRetailer";
 
-export default function Table({ rows = [] }) {
-  const columns = [
-    "Created",
-    "Retailer Name",
-    "Call Points",
-    "Time Period",
-    "Set Status",
-    "Total Planograms",
-    "Total Products",
-    "Total Stores",
-    "Status",
-    "Action",
-  ];
 
+
+export default function Page() {
   return (
-    <AppLayout>
-      <ManageRetailer />
-    </AppLayout>
+    <RoleGuard allowedRoles={["admin"]}>
+      <AppLayout>
+        <ManageRetailer />
+      </AppLayout>
+    </RoleGuard>
   );
 }

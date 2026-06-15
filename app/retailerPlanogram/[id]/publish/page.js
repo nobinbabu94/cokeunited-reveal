@@ -1,7 +1,9 @@
 "use client";
 
+import RoleGuard from "@/app/components/RoleGuard";
 import AppLayout from "@/components/layout/AppLayout";
 import { useState } from "react";
+
 
 export default function PublishPage() {
   const [requests] = useState([
@@ -61,6 +63,12 @@ export default function PublishPage() {
   };
 
   return (
+     <RoleGuard
+      allowedRoles={[
+        "admin",
+        "retailer",
+      ]}
+    >
     <AppLayout>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
@@ -154,5 +162,6 @@ export default function PublishPage() {
         </div>
       </div>
     </AppLayout>
+    </RoleGuard>
   );
 }

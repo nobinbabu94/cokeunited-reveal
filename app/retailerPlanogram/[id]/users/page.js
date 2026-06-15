@@ -1,5 +1,6 @@
 "use client";
 
+import RoleGuard from "@/app/components/RoleGuard";
 import AppLayout from "@/components/layout/AppLayout";
 import App from "next/app";
 import { useState } from "react";
@@ -71,6 +72,7 @@ export default function UsersPage() {
   };
 
   return (
+     <RoleGuard allowedRoles={["admin"]}>
     <AppLayout>
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -247,5 +249,6 @@ export default function UsersPage() {
         </div>
       </div>
     </AppLayout>
+    </RoleGuard>
   );
 }

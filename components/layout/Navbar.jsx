@@ -47,7 +47,7 @@ export default function Navbar({ onToggleSidebar }) {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
-    router.push("/login");
+    router.replace("/login");
   };
 
   return (
@@ -72,6 +72,11 @@ export default function Navbar({ onToggleSidebar }) {
           />
         </svg>
       </button>
+
+      {/* Logo */}
+      {/* <div className="ml-3 hidden sm:block">
+        <img src="/Parkers%20Kitchen.png" alt="Parkers Kitchen" className="h-8 w-auto" />
+      </div> */}
 
       {/* Retailer Planogram Header */}
       {isRetailerPlanogram && (

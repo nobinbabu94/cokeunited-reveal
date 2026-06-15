@@ -1,5 +1,6 @@
 "use client";
 
+import RoleGuard from "@/app/components/RoleGuard";
 import AppLayout from "@/components/layout/AppLayout";
 import { useState } from "react";
 
@@ -88,6 +89,12 @@ export default function RetailerStoresPage() {
   ];
 
   return (
+        <RoleGuard
+      allowedRoles={[
+        "admin",
+        "retailer",
+      ]}
+    >
     <AppLayout>
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -285,5 +292,6 @@ export default function RetailerStoresPage() {
         </div>
       </div>
     </AppLayout>
+    </RoleGuard>
   );
 }

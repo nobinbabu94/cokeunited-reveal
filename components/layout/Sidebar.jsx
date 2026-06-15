@@ -249,10 +249,28 @@ export default function Sidebar({ isOpen }) {
 
   const navItems = useMemo(() => {
     const items = getNavItems();
-    if (user && user.role === "retailer") {
-      return items.filter((i) => i.href === "/");
+    if (!user) return [];
+
+    if (user.role === "admin") {
+      return items;
     }
-    return items;
+
+    if (user.role === "retailer") {
+      return items.filter(
+        (item) =>
+          item.label === "Dashboard" ||
+          item.label === "Retailer Planogram"
+      );
+    }
+
+    if (user.role === "user") {
+      return items.filter(
+        (item) =>
+          item.label === "Dashboard"
+      );
+    }
+
+    return [];
   }, [pathname, user]);
 
   // Auto-expand parent when a child route is active
@@ -275,20 +293,15 @@ export default function Sidebar({ isOpen }) {
   return (
     <aside className={`h-screen bg-gray-900 text-white transition-all duration-200 flex flex-col ${isOpen ? 'w-72' : 'w-16'}`}>
       {/* Logo */}
-      <div className="flex items-center gap-3 px-4 py-4">
-        <div className="flex items-center justify-center w-8 h-8">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" strokeWidth="2" strokeLinejoin="round" />
-            <path d="M2 17L12 22L22 17" stroke="white" strokeWidth="2" strokeLinejoin="round" />
-            <path d="M2 12L12 17L22 12" stroke="white" strokeWidth="2" strokeLinejoin="round" />
-          </svg>
-        </div>
-        {isOpen && (
+      <div className="flex items-center gap-3 px-4 pb-4">
+        {/* <div className="flex items-center justify-center w-8 h-8">
+        </div> */}
+        {isOpen ? (
           <Link href="/" className="flex flex-col">
-            <span className="text-red-500 text-lg font-semibold">Reveal</span>
-            <span className="text-white text-base">Space Analysis System</span>
+          
+             <img src="/Parkers%20Kitchen.png" alt="Parkers Kitchen" className="h-24 w-auto" />
           </Link>
-        )}
+        ):<span className="pb-14"></span>}
       </div>
 
       {/* Nav */}
@@ -309,7 +322,7 @@ export default function Sidebar({ isOpen }) {
 
             return (
               <div key={item.label}>
-                <button
+                  <button
                   type="button"
                   aria-expanded={isExpanded}
                   aria-controls={submenuId}
@@ -330,7 +343,7 @@ export default function Sidebar({ isOpen }) {
                         : [...prev, item.label]
                     )
                   }
-                  className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? 'bg-gray-500 text-white font-semibold border-l-4 border-[#F40009] pl-2' : 'text-white hover:bg-gray-500'}`}
+                  className={`w-full text-left flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? 'bg-gray-500 text-white font-semibold border-l-4 border-[#0066B3] pl-2' : 'text-white hover:bg-gray-500'}`}
                 >
                   <span className="w-5 h-5">{item.icon}</span>
                   {isOpen && (
@@ -356,7 +369,7 @@ export default function Sidebar({ isOpen }) {
                           aria-current={childActive ? 'page' : undefined}
                           className={`text-base px-2 py-1 rounded-md ${childActive ? 'bg-gray-500 text-white' : 'text-white hover:bg-gray-500'}`}
                         >
-                          <span className="inline-block w-2 h-2 rounded-full bg-[#F40009] mr-2 align-middle" />
+                          <span className="inline-block w-2 h-2 rounded-full bg-[#7AC142] mr-2 align-middle" />
                           {child.label}
                         </Link>
                       );
@@ -373,7 +386,7 @@ export default function Sidebar({ isOpen }) {
               <Link
                 href={item.href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? 'bg-gray-500 text-white font-semibold border-l-4 border-[#F40009] pl-2' : 'text-white hover:bg-gray-500'}`}
+                className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? 'bg-gray-500 text-white font-semibold border-l-4 border-[#0066B3] pl-2' : 'text-white hover:bg-gray-500'}`}
               >
                 <span className="w-5 h-5">{item.icon}</span>
                 {isOpen && <span className="flex-1 text-lg">{item.label}</span>}

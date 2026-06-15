@@ -1,5 +1,6 @@
 "use client";
 
+import RoleGuard from "@/app/components/RoleGuard";
 import AppLayout from "@/components/layout/AppLayout";
 import { useState } from "react";
 
@@ -48,6 +49,12 @@ export default function UploadsPage() {
   };
 
   return (
+     <RoleGuard
+      allowedRoles={[
+        "admin",
+        "retailer",
+      ]}
+    >
     <AppLayout>
     <div className=" space-y-6">
       {/* Page Header */}
@@ -283,5 +290,6 @@ export default function UploadsPage() {
       )}
     </div>
     </AppLayout>
+    </RoleGuard>
   );
 }
