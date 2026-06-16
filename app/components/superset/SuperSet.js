@@ -6,9 +6,12 @@ import React, { useEffect, useState } from "react";
 
 const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
   const [tok, setTok] = useState("");
+  const [loading, setLoading] = useState(true);
 
   async function fetchGuestTokenFromBackend() {
     try {
+      setLoading(true);
+
       if (!EMBEDDED_ID) {
         console.warn(
           "fetchGuestTokenFromBackend called without EMBEDDED_ID"
@@ -43,32 +46,45 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
   useEffect(() => {
     if (!EMBEDDED_ID) return;
 
-    const mountPoint = document.getElementById("analytic2");
-    const presetDashboard = process.env.NEXT_PUBLIC_PRESET_URL;
+    const loadDashboard = async () => {
+      try {
+        setLoading(true);
 
-    if (!mountPoint) return;
+        const mountPoint = document.getElementById("analytic2");
+        const presetDashboard = process.env.NEXT_PUBLIC_PRESET_URL;
 
-    mountPoint.innerHTML = "";
+        if (!mountPoint) return;
 
-    embedDashboard({
-      id: EMBEDDED_ID,
-      supersetDomain: presetDashboard,
-      mountPoint,
-      fetchGuestToken: fetchGuestTokenFromBackend,
-      dashboardUiConfig: {
-        hideTitle: true,
-        hideChartControls: false,
-        // filters: {
-        //   expanded: report === "report",
-        // },
-      },
-    }).catch((error) => {
-      console.error("Error embedding dashboard:", error);
-    });
+        mountPoint.innerHTML = "";
+
+        await embedDashboard({
+          id: EMBEDDED_ID,
+          supersetDomain: presetDashboard,
+          mountPoint,
+          fetchGuestToken: fetchGuestTokenFromBackend,
+          dashboardUiConfig: {
+            hideTitle: true,
+            hideChartControls: false,
+          },
+        });
+      } catch (error) {
+        console.error("Error embedding dashboard:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDashboard();
   }, [EMBEDDED_ID, report]);
 
   return (
-    <main className="w-full h-full">
+    <main className="w-full h-full relative">
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/70 z-50">
+          <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-blue-600" />
+        </div>
+      )}
+
       <div
         id="analytic2"
         className="w-full h-full"
