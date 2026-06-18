@@ -175,7 +175,7 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:bg-blue-300"
+                className="w-full h-12 cursor-pointer rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:bg-blue-300"
               >
                 {loading
                   ? "Sending..."
@@ -231,7 +231,7 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:bg-blue-300"
+                className="w-full cursor-pointer h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:bg-blue-300"
               >
                 {loading
                   ? "Resetting..."
@@ -260,7 +260,7 @@ export default function ForgotPasswordPage() {
               onClick={() =>
                 router.push("/login")
               }
-              className="text-sm text-blue-600 hover:text-blue-700 hover:underline"
+              className="text-sm cursor-pointer text-blue-600 hover:text-blue-700 hover:underline"
             >
               Back to Login
             </button>

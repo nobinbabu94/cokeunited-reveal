@@ -90,15 +90,24 @@ export default function LoginPage() {
         >
           {/* Logo */}
           <div className="flex flex-col items-center mb-8">
+            <div className="flex items-center gap-4">
             <Image
-              src="/Parkers Kitchen.png"
+              src="/cokeunited-logo.png"
               alt="Logo"
               width={90}
               height={90}
               priority
               className="object-contain"
             />
-
+            <Image
+              src="/Parkers Kitchen.png"
+              alt="Logo"
+              width={60}
+              height={60}
+              priority
+              className="object-contain"
+            />
+            </div>
             <h1 className="mt-4 text-3xl font-bold text-slate-800">
               Welcome Back
             </h1>
@@ -175,7 +184,7 @@ export default function LoginPage() {
                 onClick={() =>
                   setShowPassword(!showPassword)
                 }
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
+                className="absolute cursor-pointer right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700"
               >
                 {showPassword ? (
                   /* Eye Off */
@@ -244,7 +253,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:bg-blue-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full cursor-pointer h-12 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition disabled:bg-blue-300 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isLoading ? (
               <>
@@ -280,7 +289,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => router.push("/forgot-password")}
-              className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+              className="text-sm cursor-pointer text-blue-600 hover:text-blue-800 hover:underline"
             >
               Forgot Password?
             </button>

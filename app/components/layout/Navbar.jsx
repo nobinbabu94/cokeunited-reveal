@@ -92,14 +92,19 @@ export default function Navbar() {
           </div>
         </div>
       )}
-        <div className="flex items-center">
-      <Link href="/" className="flex items-center pl-2 pr-24">
-        <img
-          src="/Parkers-Kitchen-Logo.png"
-          alt="Parker's Kitchen"
-          className="h-16   w-auto"
-        />
-      </Link>
+      <div className="flex items-center">
+        <Link href="/" className="flex items-center gap-2 pl-2 pr-24">
+          <img
+            src="/cokeunited-logo.png"
+            alt="Parker's Kitchen"
+            className="h-16   w-auto"
+          />
+          <img
+            src="/Parkers-Kitchen-Logo.png"
+            alt="Parker's Kitchen"
+            className="h-10   w-auto"
+          />
+        </Link>
       </div>
       {/* Report Details */}
       <div className="flex-1 flex justify-start">
