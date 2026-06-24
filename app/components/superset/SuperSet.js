@@ -62,13 +62,13 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
           hideChartControls: false,
         },
       });
-      if (theme === "dark") {
+   /*   if (theme === "dark") {
         dashboard.setThemeMode("dark");
       }
       else {
         dashboard.setThemeMode("default");
       }
-
+*/
       // Verify iframe actually rendered
       clearTimeout(retryRef.current);
 
@@ -88,7 +88,7 @@ const SuperSet = ({ EMBEDDED_ID, setGetTok, report }) => {
       loadingRef.current = false;
       setLoading(false);
     }
-  }, [EMBEDDED_ID, fetchGuestTokenFromBackend, theme]);
+  }, [EMBEDDED_ID, fetchGuestTokenFromBackend]);
 
   // Initial load
   useEffect(() => {
