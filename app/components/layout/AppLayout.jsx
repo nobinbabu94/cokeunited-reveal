@@ -17,7 +17,7 @@ export default function AppLayout({ children }) {
     overflow-auto
     p-4
     bg-gray-100
-    dark:bg-gray-950
+    dark:bg-[#191919]
     text-gray-900
     dark:text-white
   "
